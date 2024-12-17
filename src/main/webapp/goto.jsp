@@ -7,6 +7,6 @@
 </head>
 <body>
     <!-- Link tới Servlet -->
-    <h3><a href="<%= request.getContextPath() %>/Guest/music" target="center">Xem Quảng Cáo</a></h3>
+    <h3><a href="./Guest/music">Xem Quảng Cáo</a></h3>
 </body>
 </html>
