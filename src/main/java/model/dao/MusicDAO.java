@@ -20,7 +20,7 @@ public class MusicDAO {
 	}
 	public List<Music> getAllMusic() {
 	    List<Music> musicList = new ArrayList<>();
-	    String sql = "SELECT m.id, m.name, u.name , " +
+	    String sql = "SELECT m.id, m.name, m.author_name, m.description, u.full_name " +
 	                 "FROM musics m " +
 	                 "JOIN users u ON m.username = u.username";
 
@@ -30,11 +30,11 @@ public class MusicDAO {
 
 	        while (rs.next()) {
 	            Music music = new Music();
-	            music.setiD(rs.getString("id"));
-	            music.setName(rs.getString("name"));
-	            music.setAuthorName(rs.getString("author_name"));
-	            music.setDescription(rs.getString("description"));
-	        
+	            music.setiD(rs.getString("id")); // id từ bảng musics
+	            music.setName(rs.getString("name")); // name từ bảng musics
+	            music.setAuthorName(rs.getString("author_name")); // author_name từ bảng musics
+	            music.setDescription(rs.getString("description")); // description từ bảng musics
+	           
 	            musicList.add(music);
 	        }
 	    } catch (SQLException e) {
@@ -43,10 +43,11 @@ public class MusicDAO {
 	    return musicList;
 	}
 
+
 	public List<Music> searchMusic(String keyword) throws SQLException {
 	    List<Music> musicList = new ArrayList<>();
-	    String query = "SELECT m.music_id, m.name AS song_name, u.name AS artist_name, " +
-	                   "u.image_url AS artist_image_url, m.image_url AS song_image_url " +
+	    String query = "SELECT m.id, m.name AS song_name, u.name AS artist_name, " +
+	                   "  AS artist_image_url,   AS song_image_url " +
 	                   "FROM musics m " +
 	                   "LEFT JOIN users u ON m.user_id = u.user_id " +
 	                   "WHERE m.name LIKE ? OR u.name LIKE ?";
@@ -220,21 +221,26 @@ public class MusicDAO {
 		}
 	   public List<Music> getMusicsByArtist(String artistName) {
 		    List<Music> musicList = new ArrayList<>();
-		    String sql = "SELECT m.music_id, m.name AS song_name, m.image_url AS song_image, u.image_url AS artist_image " +
+		    String sql = "SELECT m.id, m.name AS song_name, m.description, m.author_name, u.full_name AS artist_name " +
 		                 "FROM musics m " +
-		                 "JOIN users u ON m.user_id = u.user_id " +
-		                 "WHERE u.name = ?";
+		                 "JOIN users u ON m.username = u.username " +
+		                 "WHERE u.full_name = ?";
 
 		    try (Connection conn = getConnection();
 		         PreparedStatement ps = conn.prepareStatement(sql)) {
+		        
+		        // Truyền tham số artistName vào câu SQL
 		        ps.setString(1, artistName);
 		        ResultSet rs = ps.executeQuery();
 
+		        // Duyệt qua ResultSet và tạo các đối tượng Music
 		        while (rs.next()) {
 		            Music music = new Music();
-		            music.setiD(rs.getString("id"));
-		            music.setName(rs.getString("name")); 
-		            music.setDescription(rs.getString("description"));
+		            music.setiD(rs.getString("id")); // ID bài hát
+		            music.setName(rs.getString("song_name")); // Tên bài hát
+		            music.setDescription(rs.getString("description")); // Mô tả bài hát
+		            music.setAuthorName(rs.getString("author_name")); // Tác giả bài hát
+		        
 		            musicList.add(music);
 		        }
 		    } catch (SQLException e) {

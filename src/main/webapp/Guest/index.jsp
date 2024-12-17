@@ -169,7 +169,7 @@
             </form>
         </div>
         <div class="auth-buttons">
-            <button class="btn-login">Đăng nhập</button>
+            <a class="btn-login" href="../login.jsp">Đăng nhập</a>
             <button class="btn-register">Đăng ký</button>
         </div>
     </div>
@@ -214,6 +214,7 @@
                         if (artists.add(music.getAuthorName())) {
                             if (count >= 5) break;
             %>
+            
             <div class="artist-card" onclick="window.location.href='artistDetail?artistName=<%= music.getAuthorName() %>'">
                 <img src="https://i.postimg.cc/L6wYHq9m/hh.jpg" alt="Nghệ sĩ">
                 <p><%= music.getAuthorName() %></p>
