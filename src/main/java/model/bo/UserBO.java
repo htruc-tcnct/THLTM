@@ -28,4 +28,7 @@ public class UserBO {
 	public User getUserByUsername(String username) {
 		return userDAO.getUserByUsername(username);
 	}
+	public boolean updateUser(User user) {
+		return userDAO.updateUser(user);
+	}
 }

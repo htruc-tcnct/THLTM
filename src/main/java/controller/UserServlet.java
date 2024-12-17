@@ -40,9 +40,25 @@ public class UserServlet extends HttpServlet {
 				request.setAttribute("userArr", userArr);
 				rd = getServletContext().getRequestDispatcher(destination);
 				rd.forward(request, response);
+				break;
+			case "gotoEdit":
+			    String username1 = request.getParameter("username");
+			   
+			    User u = userBO.getUserByUsername(username1);
+
+			    // Kiểm tra user lấy về từ database
+			    if (u == null) {
+			        System.out.println("User not found: " + username1);
+			    } else {
+			        System.out.println("User found: " + u.getUsername());
+			    }
+			    System.out.println(username1);
+			    request.setAttribute("user", u);
+				request.getRequestDispatcher("/user/editUser.jsp").forward(request, response);
+			    break;
 			default:
-				// Trường hợp không hợp lệ
-				// response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Hành động không hợp lệ");
+			
+				 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Hành động không hợp lệ");
 			}
 		}
 	}

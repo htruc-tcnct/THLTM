@@ -107,4 +107,26 @@ public class UserDAO {
 		}
 		return null; // Return null if no result is found or an error occurs
 	}
+	public boolean updateUser(User user) {
+	    String query = "UPDATE users SET full_name = ?, age = ?, phone_number = ? WHERE username = ?";
+	    try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+	        // Set the parameters in the prepared statement
+	        stmt.setString(1, user.getFullName());
+	        stmt.setInt(2, user.getAge());
+	        stmt.setString(3, user.getPhoneNumber());
+	        stmt.setString(4, user.getUsername());
+
+	        // Execute the update query
+	        int rowsAffected = stmt.executeUpdate();
+
+	        // If rows are affected, the update was successful
+	        return rowsAffected > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false; // Return false if an error occurs or no rows are affected
+	}
+
 }

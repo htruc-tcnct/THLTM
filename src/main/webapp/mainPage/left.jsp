@@ -70,8 +70,10 @@
         <h3>Chức năng</h3>
         <h3><a href="../user/createAds.jsp" target="center">Thêm mới Quảng cáo</a></h3>
         <h3><a href="../MusicServlet?action=viewForUser&username=<%= username %>" target="center">Xem Quảng cáo</a></h3>
+         <h3><a href="../UserController?action=gotoEdit&username=<%= username %>" target="center">Chỉnh sửa thông tin</a></h3>
         <h3><a href="../LogoutAdminServlet" onclick="logout()">Đăng xuất</a></h3>
-    <%
+     
+    <% 
         }
     %>
 </body>
