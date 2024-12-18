@@ -221,10 +221,9 @@ public class MusicDAO {
 		}
 	   public List<Music> getMusicsByArtist(String artistName) {
 		    List<Music> musicList = new ArrayList<>();
-		    String sql = "SELECT m.id, m.name AS song_name, m.description, m.author_name, u.full_name AS artist_name " +
+		    String sql = "SELECT m.id, m.name AS song_name, m.description, m.author_name, m.released_date " +
 		                 "FROM musics m " +
-		                 "JOIN users u ON m.username = u.username " +
-		                 "WHERE u.full_name = ?";
+		                 "WHERE m.author_name = ?";
 
 		    try (Connection conn = getConnection();
 		         PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -240,7 +239,8 @@ public class MusicDAO {
 		            music.setName(rs.getString("song_name")); // Tên bài hát
 		            music.setDescription(rs.getString("description")); // Mô tả bài hát
 		            music.setAuthorName(rs.getString("author_name")); // Tác giả bài hát
-		        
+		            music.setReleasedDate(rs.getDate("released_date")); // Ngày phát hành
+
 		            musicList.add(music);
 		        }
 		    } catch (SQLException e) {
@@ -248,6 +248,7 @@ public class MusicDAO {
 		    }
 		    return musicList;
 		}
+
 
 
 }

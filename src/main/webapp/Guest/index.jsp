@@ -169,8 +169,8 @@
             </form>
         </div>
         <div class="auth-buttons">
-            <a class="btn-login" href="../login.jsp">Đăng nhập</a>
-            <button class="btn-register">Đăng ký</button>
+            <a class="btn-login" href="./login.jsp">Đăng nhập</a>
+          
         </div>
     </div>
 

@@ -16,7 +16,9 @@ public class UserBO {
 		userDAO = new UserDAO(); // Khởi tạo DAO để truy cập cơ sở dữ liệu
 	}
 
-	
+	public boolean create(User user) {
+		return userDAO.create(user);
+	}
 	public ArrayList<User> getDanhSachUser() {
 		return userDAO.getDanhSachUser(); 
 	}

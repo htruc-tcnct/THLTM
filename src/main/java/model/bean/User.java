@@ -8,6 +8,13 @@ public class User {
 		this.age = age;
 		this.phoneNumber = phoneNumber;
 	}
+	public User(String username, String password,String phoneNumber) {
+		super();
+		this.username = username;
+		this.password = password;
+		
+		this.phoneNumber = phoneNumber;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -36,4 +43,11 @@ public class User {
 	private String fullName;
 	private int age;
 	private String phoneNumber;
+	private String password;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

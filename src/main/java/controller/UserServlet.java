@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -59,6 +61,25 @@ public class UserServlet extends HttpServlet {
 			default:
 			
 				 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Hành động không hợp lệ");
+			}
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if ("create".equals(action)) {
+			String username = request.getParameter("username");
+			String phone = request.getParameter("phone");
+			String pass = request.getParameter("pass");
+			User u = new User(username, pass, phone);
+			
+			UserBO o = new UserBO();
+			boolean isCreated = o.create(u);
+			if(isCreated) {
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}
+			else {
+				
 			}
 		}
 	}

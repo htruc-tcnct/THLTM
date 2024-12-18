@@ -117,7 +117,7 @@
         <h1>Thông Tin Chi Tiết Nghệ Sĩ</h1>
         <div class="artist-info">
             <!-- Hiển thị ảnh và tên nghệ sĩ -->
-            <img src="<%= request.getAttribute("artistImageUrl") %>" alt="Ảnh Nghệ Sĩ" width="200px" height="200px">
+            <img src="https://i.postimg.cc/L6wYHq9m/hh.jpg" alt="Ảnh Nghệ Sĩ" width="200px" height="200px">
             <h2><%= request.getAttribute("artistName") %></h2>
         </div>
         

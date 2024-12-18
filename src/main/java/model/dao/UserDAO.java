@@ -129,4 +129,26 @@ public class UserDAO {
 	    return false; // Return false if an error occurs or no rows are affected
 	}
 
+	public boolean create(User user) {
+	    String query = "INSERT INTO users (username, password, phone_number) VALUES (?,  ?, ?)";
+	    try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+	        // Set the parameters in the prepared statement
+	        stmt.setString(1, user.getUsername());
+	        stmt.setString(2, user.getPassword());
+	       
+	        stmt.setString(3, user.getPhoneNumber());
+
+	        // Execute the insert query
+	        int rowsAffected = stmt.executeUpdate();
+
+	        // If rows are affected, the insert was successful
+	        return rowsAffected > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false; // Return false if an error occurs or no rows are affected
+	}
+
 }
